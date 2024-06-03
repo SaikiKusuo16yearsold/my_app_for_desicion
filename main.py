@@ -5,8 +5,7 @@ app = App()
 
 
 class Container(GridLayout):
-    def change_text(self):
-        self.label_widget.text = self.krakozjabra.text.upper()
+    pass
 
 
 class MyApp(App):
