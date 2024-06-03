@@ -1,11 +1,12 @@
 from kivy.app import App
-from kivy.uix.boxlayout import BoxLayout
+from kivy.uix.gridlayout import GridLayout
 
 app = App()
 
 
-class Container(BoxLayout):
-    pass
+class Container(GridLayout):
+    def change_text(self):
+        self.label_widget.text = self.krakozjabra.text.upper()
 
 
 class MyApp(App):
@@ -14,4 +15,4 @@ class MyApp(App):
 
 
 if __name__ == '__main__':
-    MyApp().run
+    MyApp().run()
