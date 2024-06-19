@@ -1,28 +1,165 @@
-<Container>
-    rows: 3
-    padding: 50
+<MainScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+        BoxLayout:
+            size_hint_y: None
+            height: 50
+            Button:
+                text: 'New Note'
+                on_release:
+                    app.root.current = 'note'
+                    app.root.get_screen('note').note_name = ""
+                    app.root.get_screen('note').ids.name_of_decision.text = ""
+                    app.root.get_screen('note').ids.add_pulse.text = ""
+                    app.root.get_screen('note').ids.add_minus.text = ""
+                    app.root.get_screen('note').ids.answer_1.text = ""
+                    app.root.get_screen('note').ids.answer_2.text = ""
+                    app.root.get_screen('note').ids.answer_3.text = ""
+                    app.root.get_screen('note').ids.answer_4.text = ""
+        ScrollView:
+            BoxLayout:
+                id: notes_layout
+                orientation: 'vertical'
+                size_hint_y: None
+                height: self.minimum_height
 
-    krakozjabra: text_input
-    label_widget: label
+<NoteScreen>:
+    GridLayout:
+        rows: 6
+        name_of_decision: name_of_decision
+        add_pulse: add_pulse
+        add_minus: add_minus
+        answer_1: answer_1
+        answer_2: answer_2
+        answer_3: answer_3
+        answer_4: answer_4
 
-    TextInput:
-        id: text_input
-        size_hint: 1, 0.5
-        multiline: False
-        font_size: 40
+        AnchorLayout:
+            orientation: 'vertical'
+            size_hint: 0.3, 0.1
+            padding: [0, 0, 0, 0]
+            Button:
+                text: 'Сохранить'
+                multiline: False
+                size_hint: 1, 1
+                on_release:
+                    root.save_note()
 
-    Label:
-        id: label
-        text: 'Some text'
-        font_size: 40
+        AnchorLayout:
+            orientation: 'vertical'
+            size_hint: 1, 0.35
+            font_hint: 1, 1
+            padding: [5, 0, 0, 0]
+            MDTextField:
+                id: name_of_decision
+                hint_text: "Название решения"
+                multiline: False
+                font_size: '40sp'
 
+        MDBoxLayout:
+            cols: 2
+            orientation: 'vertical'
+            size_hint: 1, 0.5
+            BoxLayout:
+                orientation: 'horizontal'
+                size_hint: 1, 0.2
+                MDLabel:
+                    size_hint: 1, 0.8
+                    text: "Плюсы решения"
+                    font_size: '15sp'
+                MDLabel:
+                    size_hint: 1, 0.8
+                    text: "Минусы решения"
+                    font_size: '15sp'
 
-    FloatLayout:
-        Button:
-            size_hint: 0.5, 0.4
-            pos_hint: {'center_x': 0.5, 'y':0.1}
-            text: 'desicion_3'
+            MDBoxLayout:
+                orientation: 'horizontal'
+                size_hint: 1, 0.4
+                padding: [5, 0, 0, 0]
+                MDTextField:
+                    id: add_pulse
+                    hint_text: "Добавить плюсы"
+                    multiline: True
+                    font_size: 20
+                MDTextField:
+                    id: add_minus
+                    hint_text: "Добавить минусы"
+                    multiline: True
+                    font_size: 20
 
-            on_release:
-                root.change_text()
+        GridLayout:
+            cols: 2
+            size_hint: 1, 0.75
+            MDBoxLayout:
+                orientation: 'vertical'
+                padding: [30, 0, 0, 0]
+                size_hint: 1, 0.2
+                MDLabel:
+                    pos_hint: {'center_x': 0.5, 'y': 0.1}
+                    text: "Что я хочу достичь этим действием?"
+                    haling: 'left'
+                    valign: 'middle'
+                    text_size: self.size
+                    font_size: '15'
+                MDLabel:
+                    text: "Как это действие соотносится с моими ценностями и целями?"
+                    haling: 'left'
+                    valign: 'middle'
+                    text_size: self.size
+                    font_size: '15sp'
+            MDBoxLayout:
+                orientation: 'vertical'
+                size_hint: 1, 0.2
+                spacing: 70
+                padding: [0, 0, 0, 30]
+                MDTextField:
+                    id: answer_1
+                    hint_text: "Ответ 1"
+                    multiline: True
+                    font_size: 25
+                    pos_hint: {'right': 1, 'top': 0.2}
+                MDTextField:
+                    id: answer_2
+                    hint_text: "Ответ 2"
+                    multiline: True
+                    font_size: 25
+                    pos_hint: {'right': 1, 'y': 0.3}
 
+        GridLayout:
+            cols: 2
+            size_hint: 1, 0.75
+            MDBoxLayout:
+                orientation: 'vertical'
+                padding: [30, 0, 0, 0]
+                size_hint: 1, 1
+                MDLabel:
+                    pos_hint: {'center_x': 0.5, 'y': 0.1}
+                    text: "Какие выгоды и риски связаны с этим действием?"
+                    haling: 'left'
+                    valign: 'middle'
+                    text_size: self.size
+                    font_size: '15'
+                MDLabel:
+                    text: "Как оно повлияет на меня и на окружающих?"
+                    haling: 'left'
+                    valign: 'middle'
+                    text_size: self.size
+                    font_size: '15sp'
+            MDBoxLayout:
+                size_hint: 1, 0.2
+                orientation: 'vertical'
+                pos_hint: {'right': 1, 'y': 1}
+                spacing: 70
+                padding: [0, 0, 0, 0]
+                MDTextField:
+                    id: answer_3
+                    hint_text: "Ответ 3"
+                    multiline: True
+                    font_size: 25
+                    pos_hint: {'right': 1, 'y': 0.3}
+                MDTextField:
+                    id: answer_4
+                    hint_text: "Ответ 4"
+                    multiline: True
+                    font_size: 25
+                    pos_hint: {'right': 1, 'y': 0.3}
