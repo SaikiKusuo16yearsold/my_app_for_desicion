@@ -9,7 +9,7 @@ package-lock.json
 package.json
 # C extensions
 *.so
-
+.json
 # Distribution / packaging
 .Python
 env/
